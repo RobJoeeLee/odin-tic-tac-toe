@@ -26,3 +26,7 @@ const GameBoard = (function(){
 
     return { getBoard, updateBoard, resetBoard };
 })();
+
+const Player = function(name, marker){
+    return { name, marker };
+};
