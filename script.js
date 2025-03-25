@@ -69,5 +69,17 @@ const GameController = (function(){
             }
             return null;
         }
-    }
+    };
+
+    const playTurn = function(index){
+        if(!isGameOver && GameBoard.updateBoard(index, currentPlayer.marker)){
+            const result = checkWinner();
+            if(result){
+                console.log(result);
+                return result;
+            }
+            switchTurn();
+        }
+        return null;
+    };
 })();
