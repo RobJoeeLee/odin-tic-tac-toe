@@ -43,5 +43,9 @@ const GameController = (function(){
         currentPlayer = playerOne;
         isGameOver = false;
         GameBoard.resetBoard();
-    }
+    };
+
+    const switchTurn = function(){
+        currentPlayer = currentPlayer === playerOne ? playerTwo: playerOne;
+    };
 })();
