@@ -121,4 +121,11 @@ startButton.addEventListener("click" , () => {
     const currentPlayer = GameController.getCurrentPlayer();
     gameDisplay.textContent = `It's ${currentPlayer.name}'s turn! (${currentPlayer.marker})`;
     createBoard();
+});
+
+resetButton.addEventListener("click" , () => {
+    GameController.startGame(playerOneInput.value || "Player 1", playerTwoInput.value || "Player 2");
+    const currentPlayer = GameController.getCurrentPlayer();
+    gameDisplay.textContent = `It's ${currentPlayer.name}'s turn! (${currentPlayer.marker})`;
+    createBoard();
 })
