@@ -98,3 +98,20 @@ function createBoard(){
         gameContainer.appendChild(cell);
     };
 };
+
+function handleCellClick(event){
+    const index = event.target.dataset.index;
+    const currentPlayer = GameController.getCurrentPlayer();
+
+    if(!event.target.textContent){
+        const result = GameController.playTurn(index);
+        event.target.textContent = currentPlayer.marker;
+
+        if(result){
+            gameDisplay.textContent = result;
+        } else {
+            const nextPlayer = GameController.getCurrentPlayer;
+            gameDisplay.textContent = `It's ${nextPlayer.name}'s turn! ${nextPlayer.marker}`;
+        }
+    }
+};
