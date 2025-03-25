@@ -85,3 +85,16 @@ const GameController = (function(){
 
     return { startGame, playTurn, getCurrentPlayer: () => currentPlayer};
 })();
+
+function createBoard(){
+    gameContainer.innerHTML = "";
+
+    for(let i = 0; i < 9; i++){
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.dataset.index = i;
+
+        cell.addEventListener("click", handleCellClick)
+        gameContainer.appendChild(cell);
+    };
+};
