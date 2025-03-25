@@ -35,7 +35,7 @@ const GameController = (function(){
     let playerOne;
     let playerTwo;
     let currentPlayer;
-    isGameOver = false;
+    let isGameOver = false;
 
     const startGame = function(nameOne = "Player 1", nameTwo = "Player 2"){
         playerOne = Player(nameOne, "X");
@@ -63,15 +63,17 @@ const GameController = (function(){
                 isGameOver = true;
                 return `${currentPlayer.name} wins!`;
             }
-            if(!board.includes("")){
-                isGameOver = true;
-                return "It's a draw";
-            }
-            return null;
         }
+        if(!board.includes("")){
+            isGameOver = true;
+            return "It's a draw!";
+        }
+        return null;
     };
 
     const playTurn = function(index){
+        if(isGameOver) return null;
+
         if(!isGameOver && GameBoard.updateBoard(index, currentPlayer.marker)){
             const result = checkWinner();
             if(result){
@@ -83,7 +85,7 @@ const GameController = (function(){
         return null;
     };
 
-    return { startGame, playTurn, getCurrentPlayer: () => currentPlayer};
+    return { startGame, playTurn, getCurrentPlayer: () => currentPlayer, isGameOver: () => isGameOver };
 })();
 
 function createBoard(){
@@ -100,6 +102,7 @@ function createBoard(){
 };
 
 function handleCellClick(event){
+    if(GameController.isGameOver()) return;
     const index = event.target.dataset.index;
     const currentPlayer = GameController.getCurrentPlayer();
 
@@ -109,12 +112,17 @@ function handleCellClick(event){
 
         if(result){
             gameDisplay.textContent = result;
+            disableAllCells();
         } else {
-            const nextPlayer = GameController.getCurrentPlayer;
+            const nextPlayer = GameController.getCurrentPlayer();
             gameDisplay.textContent = `It's ${nextPlayer.name}'s turn! (${nextPlayer.marker})`;
         }
     }
 };
+
+function disableAllCells(){
+    document.querySelectorAll(".cell").forEach(cell => cell.classList.add("disabled"));
+}
 
 startButton.addEventListener("click" , () => {
     GameController.startGame(playerOneInput.value || "Player 1", playerTwoInput.value || "Player 2");
