@@ -30,3 +30,18 @@ const GameBoard = (function(){
 const Player = function(name, marker){
     return { name, marker };
 };
+
+const GameController = (function(){
+    let playerOne;
+    let playerTwo;
+    let currentPlayer;
+    isGameOver = false;
+
+    const startGame = function(nameOne = "Player 1", nameTwo = "Player 2"){
+        playerOne = Player(nameOne, "X");
+        playerTwo = Player(nameTwo, "O");
+        currentPlayer = playerOne;
+        isGameOver = false;
+        GameBoard.resetBoard();
+    }
+})();
