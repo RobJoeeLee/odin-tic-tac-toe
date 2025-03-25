@@ -82,4 +82,6 @@ const GameController = (function(){
         }
         return null;
     };
+
+    return { startGame, playTurn, getCurrentPlayer: () => currentPlayer};
 })();
